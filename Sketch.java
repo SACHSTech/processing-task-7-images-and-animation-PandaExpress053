@@ -12,11 +12,15 @@ public class Sketch extends PApplet {
   float fltRectSpeedX = 2;
   float fltRectSpeedY = 1;
 
-  float fltBeeX = 100;
-  float fltBeeY = 100;
+  float fltBeeX;
+  float fltBeeY;
 
-  float fltBeeSpeedX = 3;
-  float fltBeeSpeedY;
+  float fltBeeXPrev = 100;
+  float fltBeeYPrev = 100;
+
+  float fltBeeSpeed = 3;
+
+  double dblAng = 0;
 
 
   public void settings() {
@@ -67,21 +71,25 @@ public class Sketch extends PApplet {
       fltRectSpeedY *= -1;
     }
     
-    // bee sinozoidal movement
+    // bee circular movement
     image(imgBee, fltBeeX, fltBeeY);
-    fltBeeSpeedY = 5 * (float) (Math.sin((fltBeeX) * (float)(Math.PI / 180)));
-    fltBeeX += fltBeeSpeedX;
+    fltBeeY += fltBeeSpeed * (float) (Math.sin((dblAng) * (Math.PI / 180)));
+    fltBeeX += fltBeeSpeed * (float) (Math.cos((dblAng) * (Math.PI / 180)));
+    dblAng += 1;
 
-    // keeps bee in Y-position threshold, so sinozoidal movement doesn't push bee beyond screen size
-    if (fltBeeY + fltBeeSpeedY < 150  || fltBeeY + fltBeeSpeedY > height - 150) {}
-    else{
-      fltBeeY += fltBeeSpeedY;
+    // sees if bee will contact y-position constraints, if so Y_Pos will not change
+    if (fltBeeY < 0  || fltBeeY > height - 100) {
+      fltBeeY = fltBeeYPrev;
     }
-    // collision detection of screen width constraints
+    // sees if bee will contact x-position constraints, if so X_Pos will not change
     if (fltBeeX < -40 || fltBeeX > width - 110) {
-      fltBeeSpeedX *= -1;
-      fltBeeSpeedY *= -1;
+      fltBeeX = fltBeeXPrev;
     }
-    
+
+    // resets previous position variables
+    fltBeeXPrev = fltBeeX;
+    fltBeeYPrev = fltBeeY;
+
+    //grass hopper
   }
 }
