@@ -67,12 +67,12 @@ public class Sketch extends PApplet {
       fltRectSpeedY *= -1;
     }
     
-    // bee parabolic movement
+    // bee sinozoidal movement
     image(imgBee, fltBeeX, fltBeeY);
     fltBeeSpeedY = 5 * (float) (Math.sin((fltBeeX) * (float)(Math.PI / 180)));
     fltBeeX += fltBeeSpeedX;
 
-    // keeps bee in Y-position threshold, so parabolic movement doesn't push bee beyond screen size
+    // keeps bee in Y-position threshold, so sinozoidal movement doesn't push bee beyond screen size
     if (fltBeeY + fltBeeSpeedY < 150  || fltBeeY + fltBeeSpeedY > height - 150) {}
     else{
       fltBeeY += fltBeeSpeedY;
