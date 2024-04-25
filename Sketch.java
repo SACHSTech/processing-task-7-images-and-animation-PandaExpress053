@@ -103,10 +103,8 @@ public class Sketch extends PApplet {
     fltBeeXPrev = fltBeeX;
     fltBeeYPrev = fltBeeY;
 
-    // grasshopper
+    // grasshopper sinozoidal movement
     image(imgGrassHopper, fltHopX, fltHopY);
-
-    // sinozoidal Y-positioin movement
     fltHopY += (float) 3 * (Math.sin((fltHopX) * (Math.PI / 180)));
   
     
@@ -122,7 +120,7 @@ public class Sketch extends PApplet {
     // moving grasshopper x_pos
     fltHopX += fltHopSpeed;
 
-    //resetting previous position variable
+    // resetting previous position variable
     fltHopYPrev = fltHopY;
   }
 }
