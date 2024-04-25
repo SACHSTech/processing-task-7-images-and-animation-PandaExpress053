@@ -5,6 +5,7 @@ public class Sketch extends PApplet {
   // Initialize global variables
 	PImage imgBackground;
   PImage imgBee;
+  PImage imgGrassHopper;
 
   float fltRectX;
   float fltRectY;
@@ -22,16 +23,24 @@ public class Sketch extends PApplet {
 
   double dblAng = 0;
 
+  float fltHopY, fltHopX;
+  float fltHopYPrev = 0;
+  float fltHopSpeed = 2;
+
+
+
 
   public void settings() {
     
     // set size of screen
     size(610, 510);
 
-    // set size of images
+    // intialize and resize images
     imgBackground = loadImage("background.png");
     imgBee = loadImage("cartoon-bee.png");
-    imgBee.resize(imgBee.width / 6,imgBee.height / 6);
+    imgBee.resize(imgBee.width / 6, imgBee.height / 6);
+    imgGrassHopper = loadImage("grasshopper.png");
+    imgGrassHopper.resize(imgGrassHopper.width / 8,imgGrassHopper.height / 8);
 
     // stating initial starting position
     fltRectX = width / 2;
@@ -39,6 +48,10 @@ public class Sketch extends PApplet {
 
     fltBeeX = width / 2;
     fltBeeY = height / 2; 
+
+    fltHopX = width / 2;
+    fltHopY = height / 2; 
+
   }
 
   /** 
@@ -90,6 +103,26 @@ public class Sketch extends PApplet {
     fltBeeXPrev = fltBeeX;
     fltBeeYPrev = fltBeeY;
 
-    //grass hopper
+    // grasshopper
+    image(imgGrassHopper, fltHopX, fltHopY);
+
+    // sinozoidal Y-positioin movement
+    fltHopY += (float) 3 * (Math.sin((fltHopX) * (Math.PI / 180)));
+  
+    
+    // hard stop so that grasshopper stays on screen
+    if (fltHopY < 0  || fltHopY > height - 100) {
+      fltHopY = fltHopYPrev;
+    }
+    // sees if grasshopper will contact x-position constraints, if so grasshopper will jump in the other direction
+    if (fltHopX < -40 || fltHopX > width - 110) {
+      fltHopSpeed *= -1;
+    }
+
+    // moving grasshopper x_pos
+    fltHopX += fltHopSpeed;
+
+    //resetting previous position variable
+    fltHopYPrev = fltHopY;
   }
 }
