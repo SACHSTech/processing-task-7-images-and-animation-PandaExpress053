@@ -1,7 +1,11 @@
 import processing.core.PApplet;
 import processing.core.PImage;
 public class Sketch extends PApplet {
-	
+	/**
+   * Description: Creates three objects: diagonal moving rectange, circular moving bee, parabolic moving grasshopper
+   * Uses imported images for background and objects
+   * @author: E.Fung
+   */
   // Initialize global variables
 	PImage imgBackground;
   PImage imgBee;
